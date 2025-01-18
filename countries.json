@@ -1,21 +1,141 @@
 [
   {
-    "name": "France",
-    "lat": 46.2276,
-    "lng": 2.2137,
-    "voiceLang": "fr-FR",
+    "name": "United States",
+    "lat": 37.0902,
+    "lng": -95.7129,
+    "voiceLang": "en-US",
+    "langGroup": "English",
     "sampleTexts": [
-      "J'aime voyager et rencontrer de nouvelles personnes.",
-      "Le fromage et le pain sont mes aliments préférés.",
-      "Il fait très beau aujourd'hui, n'est-ce pas ?",
-      "Je suis ravi de faire votre connaissance."
+      "Hi there, how's it going?",
+      "I love exploring different states by road trip.",
+      "The weather is really pleasant today.",
+      "Have you tried the local barbecue?"
     ]
   },
+  {
+    "name": "United Kingdom",
+    "lat": 55.3781,
+    "lng": -3.4360,
+    "voiceLang": "en-GB",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Good morning! Fancy a cup of tea?",
+      "I'm heading to the underground station.",
+      "The countryside here is beautiful.",
+      "Learning new languages is quite fun."
+    ]
+  },
+  {
+    "name": "Australia",
+    "lat": -25.2744,
+    "lng": 133.7751,
+    "voiceLang": "en-AU",
+    "langGroup": "English",
+    "sampleTexts": [
+      "G'day mate, how are ya?",
+      "It's pretty warm most of the year here.",
+      "Have you seen any kangaroos?",
+      "Let's head to the beach this weekend."
+    ]
+  },
+  {
+    "name": "Canada (English)",
+    "lat": 56.1304,
+    "lng": -106.3468,
+    "voiceLang": "en-CA",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Hey there, how's it going, eh?",
+      "Have you tried maple syrup yet?",
+      "The winters can be quite cold here.",
+      "I'm planning a trip to the Rockies."
+    ]
+  },
+  {
+    "name": "New Zealand",
+    "lat": -40.9006,
+    "lng": 174.8860,
+    "voiceLang": "en-NZ",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Kia ora! How's your day?",
+      "The landscapes here are breathtaking.",
+      "I'm keen on hiking and outdoor adventures.",
+      "This country is famous for its sheep."
+    ]
+  },
+  {
+    "name": "Ireland",
+    "lat": 53.4129,
+    "lng": -8.2439,
+    "voiceLang": "en-IE",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Top of the morning to you!",
+      "It's a lovely day for a stroll, isn't it?",
+      "I'm looking forward to some live music.",
+      "The green countryside is so peaceful."
+    ]
+  },
+  {
+    "name": "South Africa",
+    "lat": -30.5595,
+    "lng": 22.9375,
+    "voiceLang": "en-ZA",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Hello, have you been on a safari?",
+      "I'm excited to see the wildlife here.",
+      "It's quite sunny today, isn't it?",
+      "Let's braai some delicious food!"
+    ]
+  },
+  {
+    "name": "Nigeria",
+    "lat": 9.0820,
+    "lng": 8.6753,
+    "voiceLang": "en-NG",
+    "langGroup": "English",
+    "sampleTexts": [
+      "How far now, friend?",
+      "I love the vibrant music scene here.",
+      "The jollof rice is amazing.",
+      "Have you visited Lagos yet?"
+    ]
+  },
+  {
+    "name": "India (English)",
+    "lat": 20.5937,
+    "lng": 78.9629,
+    "voiceLang": "en-IN",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Namaste, how are you today?",
+      "I'm planning a trip to the Taj Mahal.",
+      "The street food here is fantastic!",
+      "It's a diverse country with many languages."
+    ]
+  },
+  {
+    "name": "Philippines (English)",
+    "lat": 12.8797,
+    "lng": 121.7740,
+    "voiceLang": "en-PH",
+    "langGroup": "English",
+    "sampleTexts": [
+      "Hello! Have you tried halo-halo?",
+      "I'm heading to a beautiful island resort.",
+      "The people here are very friendly.",
+      "It's more fun in the Philippines!"
+    ]
+  },
+
   {
     "name": "Spain",
     "lat": 40.4637,
     "lng": -3.7492,
     "voiceLang": "es-ES",
+    "langGroup": "Spanish",
     "sampleTexts": [
       "Me encanta escuchar música y bailar.",
       "¿Dónde está la estación de tren más cercana?",
@@ -24,27 +144,265 @@
     ]
   },
   {
-    "name": "Germany",
-    "lat": 51.1657,
-    "lng": 10.4515,
-    "voiceLang": "de-DE",
+    "name": "Mexico",
+    "lat": 23.6345,
+    "lng": -102.5528,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
     "sampleTexts": [
-      "Ich trinke gern Kaffee am Morgen.",
-      "Wo ist das nächste Museum?",
-      "Das Wetter ist heute wirklich angenehm.",
-      "Ich lerne gerade eine neue Sprache."
+      "¿Puedes recomendar un buen restaurante?",
+      "Me gusta la comida picante.",
+      "Hoy hace un clima estupendo, ¿verdad?",
+      "Estoy buscando aprender más sobre otras culturas."
     ]
   },
   {
-    "name": "Italy",
-    "lat": 41.8719,
-    "lng": 12.5674,
-    "voiceLang": "it-IT",
+    "name": "Colombia",
+    "lat": 4.5709,
+    "lng": -74.2973,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
     "sampleTexts": [
-      "Amo la pasta e la pizza!",
-      "Che bella giornata per una passeggiata.",
-      "Stavo leggendo un libro molto interessante.",
-      "Mi piace incontrare gente nuova."
+      "Los paisajes aquí son hermosos.",
+      "¿Te gusta tomar café por la mañana?",
+      "Estoy emocionado de conocer gente nueva.",
+      "Este lugar tiene mucha historia."
+    ]
+  },
+  {
+    "name": "Argentina",
+    "lat": -38.4161,
+    "lng": -63.6167,
+    "voiceLang": "es-AR",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "¿Probaste el mate? Es muy popular aquí.",
+      "El tango es nuestra danza más famosa.",
+      "Los paisajes de la Patagonia son increíbles.",
+      "Hace bastante frío en el sur del país."
+    ]
+  },
+  {
+    "name": "Chile",
+    "lat": -35.6751,
+    "lng": -71.5430,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "El desierto de Atacama es impresionante.",
+      "¿Te gusta esquiar en la cordillera?",
+      "La comida con mariscos es deliciosa.",
+      "Santiago es una ciudad muy moderna."
+    ]
+  },
+  {
+    "name": "Peru",
+    "lat": -9.1899,
+    "lng": -75.0152,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "¿Has visitado Machu Picchu?",
+      "La gastronomía peruana es muy variada.",
+      "Me encanta el ceviche y la chicha morada.",
+      "El clima cambia mucho según la región."
+    ]
+  },
+  {
+    "name": "Venezuela",
+    "lat": 6.4238,
+    "lng": -66.5897,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "¿Te gusta la arepa o la empanada?",
+      "El Salto Ángel es la cascada más alta del mundo.",
+      "Hace mucho calor en esta región.",
+      "El petróleo es una industria importante aquí."
+    ]
+  },
+  {
+    "name": "Ecuador",
+    "lat": -1.8312,
+    "lng": -78.1834,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "Las islas Galápagos son increíbles.",
+      "¿Has probado el chocolate ecuatoriano?",
+      "Este país tiene volcanes activos.",
+      "La altura de Quito es notable."
+    ]
+  },
+  {
+    "name": "Guatemala",
+    "lat": 15.7835,
+    "lng": -90.2308,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "La cultura maya todavía es muy visible.",
+      "El lago de Atitlán es hermoso.",
+      "¿Conoces la ciudad de Antigua?",
+      "Los tejidos típicos son muy coloridos."
+    ]
+  },
+  {
+    "name": "Costa Rica",
+    "lat": 9.7489,
+    "lng": -83.7534,
+    "voiceLang": "es-ES",
+    "langGroup": "Spanish",
+    "sampleTexts": [
+      "¡Pura vida! Es la frase más popular aquí.",
+      "La biodiversidad de este país es enorme.",
+      "Me encanta visitar los parques nacionales.",
+      "¿Has ido a las playas de Guanacaste?"
+    ]
+  },
+
+  {
+    "name": "France",
+    "lat": 46.2276,
+    "lng": 2.2137,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "J'aime voyager et découvrir de nouveaux endroits.",
+      "Le fromage et le vin sont délicieux.",
+      "Il fait assez beau aujourd'hui, tu ne trouves pas ?",
+      "Je suis heureux de vous rencontrer."
+    ]
+  },
+  {
+    "name": "Canada (French)",
+    "lat": 56.1304,
+    "lng": -106.3468,
+    "voiceLang": "fr-CA",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Bonjour, comment ça va?",
+      "Où se trouve le supermarché le plus proche?",
+      "J'apprends le français depuis quelques mois.",
+      "Il fait froid, mais j'aime l'hiver."
+    ]
+  },
+  {
+    "name": "Belgium",
+    "lat": 50.5039,
+    "lng": 4.4699,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "La bière et le chocolat sont populaires ici.",
+      "Bruxelles est une ville internationale.",
+      "On parle plusieurs langues dans ce pays.",
+      "Les gaufres belges sont délicieuses."
+    ]
+  },
+  {
+    "name": "Switzerland (French region)",
+    "lat": 46.8182,
+    "lng": 8.2275,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Les montagnes suisses sont magnifiques.",
+      "On parle allemand, français et italien ici.",
+      "J'adore le fromage fondue.",
+      "La propreté des villes est impressionnante."
+    ]
+  },
+  {
+    "name": "Luxembourg (French-speaking)",
+    "lat": 49.8153,
+    "lng": 6.1296,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "C'est un petit pays, mais très riche.",
+      "On parle également le luxembourgeois ici.",
+      "Les châteaux historiques sont fascinants.",
+      "J'aime me promener dans la vieille ville."
+    ]
+  },
+  {
+    "name": "Senegal",
+    "lat": 14.4974,
+    "lng": -14.4524,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Bonjour, comment vas-tu?",
+      "La musique et la danse sont très importantes ici.",
+      "Il fait souvent chaud toute l'année.",
+      "Le thé à la menthe est très apprécié."
+    ]
+  },
+  {
+    "name": "Ivory Coast",
+    "lat": 7.539989,
+    "lng": -5.54708,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Abidjan est la grande ville du pays.",
+      "La culture francophone est très forte ici.",
+      "J'adore la cuisine ivoirienne.",
+      "Le climat est tropical et humide."
+    ]
+  },
+  {
+    "name": "Madagascar",
+    "lat": -18.7669,
+    "lng": 46.8691,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Les lémuriens sont très connus ici.",
+      "On parle malgache et français.",
+      "La biodiversité est incroyable.",
+      "Il y a de superbes plages aussi."
+    ]
+  },
+  {
+    "name": "Haiti",
+    "lat": 18.9712,
+    "lng": -72.2852,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "Le créole est aussi parlé ici.",
+      "Port-au-Prince est la capitale.",
+      "Il fait souvent chaud et humide.",
+      "La culture est très riche malgré les défis."
+    ]
+  },
+  {
+    "name": "Monaco",
+    "lat": 43.7384,
+    "lng": 7.4246,
+    "voiceLang": "fr-FR",
+    "langGroup": "French",
+    "sampleTexts": [
+      "C'est un micro-État sur la Côte d'Azur.",
+      "Le casino de Monte-Carlo est célèbre.",
+      "Le Grand Prix de Formule 1 est un événement majeur.",
+      "La vie ici est très luxueuse."
+    ]
+  },
+
+  {
+    "name": "Portugal",
+    "lat": 39.3999,
+    "lng": -8.2245,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "Gosto de experimentar comida típica.",
+      "Onde posso encontrar uma livraria perto daqui?",
+      "O dia está ensolarado e lindo, não é?",
+      "Eu amo aprender idiomas novos."
     ]
   },
   {
@@ -52,6 +410,7 @@
     "lat": -14.2350,
     "lng": -51.9253,
     "voiceLang": "pt-BR",
+    "langGroup": "Portuguese",
     "sampleTexts": [
       "Eu adoro dançar e cantar no chuveiro.",
       "Onde fica a padaria mais próxima?",
@@ -60,63 +419,817 @@
     ]
   },
   {
-    "name": "Japan",
-    "lat": 36.2048,
-    "lng": 138.2529,
-    "voiceLang": "ja-JP",
+    "name": "Angola",
+    "lat": -11.2027,
+    "lng": 17.8739,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
     "sampleTexts": [
-      "毎朝お茶を飲むのが大好きです。",
-      "近くに有名なレストランはありますか？",
-      "今日は本当にいい天気ですね。",
-      "新しい趣味を探しているところです。"
+      "Este país tem muitos recursos naturais.",
+      "A música e a dança são vibrantes aqui.",
+      "O clima é tropical em muitas regiões.",
+      "Adoro o sabor da comida local."
     ]
   },
   {
-    "name": "Sweden",
-    "lat": 60.1282,
-    "lng": 18.6435,
-    "voiceLang": "sv-SE",
+    "name": "Mozambique",
+    "lat": -18.6657,
+    "lng": 35.5296,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
     "sampleTexts": [
-      "Hej! Hur mår du idag?",
-      "Jag gillar att fika och dricka kaffe.",
-      "Det är en vacker dag för en promenad.",
-      "Välkommen till vårt land!"
+      "O litoral aqui é maravilhoso.",
+      "A cultura é muito diversa.",
+      "Onde posso encontrar frutos do mar frescos?",
+      "É um país cheio de belezas naturais."
     ]
   },
+  {
+    "name": "Cape Verde",
+    "lat": 16.5388,
+    "lng": -23.0418,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "As ilhas aqui têm belas praias.",
+      "A música tradicional é o morna.",
+      "O clima é árido, mas agradável.",
+      "A cultura é uma mistura africana e portuguesa."
+    ]
+  },
+  {
+    "name": "Guinea-Bissau",
+    "lat": 11.8037,
+    "lng": -15.1804,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "É um país pequeno na África Ocidental.",
+      "A capital é Bissau, perto do litoral.",
+      "A língua crioula também é falada.",
+      "A cultura local é muito colorida."
+    ]
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "lat": 0.1864,
+    "lng": 6.6131,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "É um arquipélago no Golfo da Guiné.",
+      "A floresta tropical é densa.",
+      "Os mariscos são muito populares na culinária.",
+      "O ritmo de vida é tranquilo."
+    ]
+  },
+  {
+    "name": "East Timor",
+    "lat": -8.8742,
+    "lng": 125.7275,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "Também se fala tétum aqui.",
+      "A independência foi conquistada há pouco tempo.",
+      "As praias e paisagens são muito bonitas.",
+      "A capital é Díli, na costa norte."
+    ]
+  },
+  {
+    "name": "Equatorial Guinea",
+    "lat": 1.6508,
+    "lng": 10.2679,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "Também se fala espanhol aqui.",
+      "A capital é Malabo, na ilha de Bioko.",
+      "O clima é equatorial, muito úmido.",
+      "A economia depende do petróleo."
+    ]
+  },
+  {
+    "name": "Macau",
+    "lat": 22.1987,
+    "lng": 113.5439,
+    "voiceLang": "pt-PT",
+    "langGroup": "Portuguese",
+    "sampleTexts": [
+      "Já foi colônia portuguesa por muitos anos.",
+      "Os cassinos são famosos mundialmente.",
+      "A cultura é uma mistura de chinês e português.",
+      "As ruas têm placas bilingues."
+    ]
+  },
+
+  {
+    "name": "Germany",
+    "lat": 51.1657,
+    "lng": 10.4515,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Ich trinke gern Kaffee am Morgen.",
+      "Wo ist das nächste Museum?",
+      "Das Wetter ist heute wirklich angenehm.",
+      "Ich lerne gerade eine neue Sprache."
+    ]
+  },
+  {
+    "name": "Austria",
+    "lat": 47.5162,
+    "lng": 14.5501,
+    "voiceLang": "de-AT",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Grüß Gott! Wie geht es dir?",
+      "Wien ist die Hauptstadt und sehr historisch.",
+      "Die Alpen sind wunderbar zum Skifahren.",
+      "Ich genieße eine Tasse Kaffee und Sachertorte."
+    ]
+  },
+  {
+    "name": "Switzerland (German region)",
+    "lat": 46.8182,
+    "lng": 8.2275,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "In der Schweiz spricht man Deutsch, Französisch und Italienisch.",
+      "Die Berge hier sind atemberaubend.",
+      "Schweizer Schokolade ist köstlich.",
+      "Ich liebe die Pünktlichkeit der Züge."
+    ]
+  },
+  {
+    "name": "Liechtenstein",
+    "lat": 47.1660,
+    "lng": 9.5554,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Ein sehr kleines Fürstentum in den Alpen.",
+      "Vaduz ist die Hauptstadt.",
+      "Die Landschaft ist bergig und malerisch.",
+      "Die offizielle Sprache ist Deutsch."
+    ]
+  },
+  {
+    "name": "Luxembourg (German-speaking)",
+    "lat": 49.8153,
+    "lng": 6.1296,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Viele Einwohner sprechen auch Deutsch.",
+      "Die Banken sind sehr wichtig für die Wirtschaft.",
+      "Es ist ein sehr kleines, aber reiches Land.",
+      "Man hört oft Französisch und Deutsch gemischt."
+    ]
+  },
+  {
+    "name": "Belgium (German region)",
+    "lat": 50.5039,
+    "lng": 4.4699,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Ein kleiner Teil spricht Deutsch in Belgien.",
+      "Das Land hat drei offizielle Sprachen.",
+      "Die Region ist in der Nähe von Aachen.",
+      "Die Menschen hier sind mehrsprachig."
+    ]
+  },
+  {
+    "name": "Namibia (German heritage)",
+    "lat": -22.9576,
+    "lng": 18.4904,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Es gibt Städte mit deutschem Einfluss.",
+      "Windhoek ist die Hauptstadt.",
+      "Deutsch wird noch von manchen gesprochen.",
+      "Die Landschaft ist sehr trocken und wüstenartig."
+    ]
+  },
+  {
+    "name": "Denmark (German minority)",
+    "lat": 56.2639,
+    "lng": 9.5018,
+    "voiceLang": "de-DE",
+    "langGroup": "German",
+    "sampleTexts": [
+      "Im Grenzgebiet spricht eine Minderheit Deutsch.",
+      "Kopenhagen ist die Hauptstadt, spricht aber Dänisch.",
+      "Das Essen hier ist ziemlich lecker.",
+      "Die Küste ist sehr schön für einen Spaziergang."
+    ]
+  },
+
+  {
+    "name": "Italy",
+    "lat": 41.8719,
+    "lng": 12.5674,
+    "voiceLang": "it-IT",
+    "langGroup": "Italian",
+    "sampleTexts": [
+      "Amo la pasta e la pizza!",
+      "Che bella giornata per una passeggiata.",
+      "Stavo leggendo un libro molto interessante.",
+      "Mi piace incontrare gente nuova."
+    ]
+  },
+  {
+    "name": "Switzerland (Italian region)",
+    "lat": 46.8182,
+    "lng": 8.2275,
+    "voiceLang": "it-IT",
+    "langGroup": "Italian",
+    "sampleTexts": [
+      "La parte meridionale parla italiano.",
+      "Il Lago di Lugano è molto pittoresco.",
+      "I treni sono sempre puntuali qui.",
+      "Amo i paesaggi alpini."
+    ]
+  },
+  {
+    "name": "San Marino",
+    "lat": 43.9424,
+    "lng": 12.4578,
+    "voiceLang": "it-IT",
+    "langGroup": "Italian",
+    "sampleTexts": [
+      "È una piccola repubblica dentro l'Italia.",
+      "Le viste dai monti sono bellissime.",
+      "La moneta ufficiale è l'euro.",
+      "È uno dei più antichi stati sovrani."
+    ]
+  },
+  {
+    "name": "Vatican City",
+    "lat": 41.9022,
+    "lng": 12.4539,
+    "voiceLang": "it-IT",
+    "langGroup": "Italian",
+    "sampleTexts": [
+      "È lo stato più piccolo del mondo.",
+      "La Basilica di San Pietro è incredibile.",
+      "Il Papa risiede qui.",
+      "Circondato completamente da Roma."
+    ]
+  },
+
   {
     "name": "Russia",
     "lat": 61.5240,
     "lng": 105.3188,
     "voiceLang": "ru-RU",
+    "langGroup": "Russian",
     "sampleTexts": [
       "Как дела? Я рад познакомиться.",
-      "Где находится ближайшая автобусная остановка?",
       "Сегодня очень хорошая погода.",
-      "Я изучаю иностранные языки."
+      "Я изучаю иностранные языки.",
+      "Где находится ближайший магазин?"
     ]
   },
   {
-    "name": "Turkey",
-    "lat": 38.9637,
-    "lng": 35.2433,
-    "voiceLang": "tr-TR",
+    "name": "Belarus",
+    "lat": 53.7098,
+    "lng": 27.9534,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
     "sampleTexts": [
-      "Merhaba, nasılsınız?",
-      "Bu şehir çok güzel ve tarihî.",
-      "Hava bugün gerçekten harika.",
-      "Yeni insanlarla tanışmayı seviyorum."
+      "Привет! Как твой день?",
+      "Здесь говорят и на русском, и на белорусском.",
+      "Минск - столица республики.",
+      "Зимой здесь довольно холодно."
     ]
   },
   {
-    "name": "Korea",
-    "lat": 36.0,
-    "lng": 128.0,
-    "voiceLang": "ko-KR",
+    "name": "Kazakhstan",
+    "lat": 48.0196,
+    "lng": 66.9237,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
     "sampleTexts": [
-      "안녕하세요, 만나서 반갑습니다.",
-      "가장 가까운 지하철역이 어디예요?",
-      "오늘 날씨가 정말 좋네요.",
-      "새로운 문화를 배우는 것을 좋아해요."
+      "Русский здесь распространен, как и казахский.",
+      "Астана - современный город.",
+      "Люблю степные пейзажи этой страны.",
+      "Погода может быть очень переменчивой."
+    ]
+  },
+  {
+    "name": "Kyrgyzstan",
+    "lat": 41.2044,
+    "lng": 74.7661,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
+    "sampleTexts": [
+      "Горы Тянь-Шань очень красивые.",
+      "Многие люди говорят на русском.",
+      "Бишкек - столица, довольно оживлённая.",
+      "Здесь можно найти замечательные озёра."
+    ]
+  },
+  {
+    "name": "Ukraine (Russian-speaking areas)",
+    "lat": 48.3794,
+    "lng": 31.1656,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
+    "sampleTexts": [
+      "В восточных регионах часто говорят по-русски.",
+      "Киев - главный город, где слышна и украинская речь.",
+      "Здесь богата история и культура.",
+      "Вкусная традиционная еда, как вареники."
+    ]
+  },
+  {
+    "name": "Moldova (Russian minority)",
+    "lat": 47.4116,
+    "lng": 28.3699,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
+    "sampleTexts": [
+      "Небольшая страна между Украиной и Румынией.",
+      "Русский язык используется в некоторых областях.",
+      "Кишинёв - главный город.",
+      "Здесь также говорят на румынском языке."
+    ]
+  },
+  {
+    "name": "Georgia (Russian minority)",
+    "lat": 42.3154,
+    "lng": 43.3569,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
+    "sampleTexts": [
+      "Некоторые люди понимают русский, особенно старшие.",
+      "Тбилиси - прекрасная столица.",
+      "Еда тут очень вкусная, особенно хинкали и хачапури.",
+      "Горы и природа просто потрясающие."
+    ]
+  },
+  {
+    "name": "Tajikistan",
+    "lat": 38.8610,
+    "lng": 71.2761,
+    "voiceLang": "ru-RU",
+    "langGroup": "Russian",
+    "sampleTexts": [
+      "Русский ещё используется, хотя есть таджикский.",
+      "Душанбе - крупный город в горах.",
+      "Зима бывает довольно суровой.",
+      "Люди здесь очень гостеприимны."
+    ]
+  },
+
+  {
+    "name": "Japan",
+    "lat": 36.2048,
+    "lng": 138.2529,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "こんにちは、お元気ですか？",
+      "お寿司がとても美味しいですね。",
+      "東京はとてもにぎやかな都市です。",
+      "日本には美しいお寺がたくさんあります。"
+    ]
+  },
+  {
+    "name": "Brazil (Japanese community)",
+    "lat": -14.2350,
+    "lng": -51.9253,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "サンパウロには大きな日本人街があります。",
+      "日系ブラジル人の文化はとてもユニークです。",
+      "ポルトガル語と日本語が混ざることもあります。",
+      "お祭りでは和太鼓や盆踊りを楽しめます。"
+    ]
+  },
+  {
+    "name": "Hawaii (USA, Japanese community)",
+    "lat": 19.8968,
+    "lng": -155.5828,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "ハワイには多くの日系人が住んでいます。",
+      "温暖な気候がとても過ごしやすいです。",
+      "日本語の看板を見かけることもあります。",
+      "フラダンスと盆踊りの交流が面白いです。"
+    ]
+  },
+  {
+    "name": "Peru (Japanese community)",
+    "lat": -9.1899,
+    "lng": -75.0152,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "日系ペルー人の歴史は長いです。",
+      "リマには日本食レストランがたくさんあります。",
+      "スペイン語と日本語が混じることも多いです。",
+      "文化交流がとても興味深いですね。"
+    ]
+  },
+  {
+    "name": "Taiwan (Japanese heritage)",
+    "lat": 23.6978,
+    "lng": 120.9605,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "昔、日本の統治下にあった時代があります。",
+      "一部の高齢者は日本語を話せます。",
+      "お茶と日本の影響が混在しています。",
+      "夜市で色々な食べ物を楽しめます。"
+    ]
+  },
+  {
+    "name": "Micronesia (Japanese influence)",
+    "lat": 7.4256,
+    "lng": 150.5508,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "日本統治時代の名残がある地域です。",
+      "ローカル言語と日本語が混ざることもあります。",
+      "海がとても綺麗でダイビングが有名です。",
+      "島々は小さいけど自然が豊かです。"
+    ]
+  },
+  {
+    "name": "Guam (USA, Japanese tourism)",
+    "lat": 13.4443,
+    "lng": 144.7937,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "観光地で日本語がよく使われます。",
+      "ビーチリゾートが多い場所です。",
+      "買い物や食事に日本語の案内があります。",
+      "気候が一年中暖かいので過ごしやすいです。"
+    ]
+  },
+  {
+    "name": "Northern Mariana Islands (Japanese tourism)",
+    "lat": 15.0979,
+    "lng": 145.6739,
+    "voiceLang": "ja-JP",
+    "langGroup": "Japanese",
+    "sampleTexts": [
+      "サイパン島は日本人観光客が多いです。",
+      "ガイドが日本語を話せることもよくあります。",
+      "透き通った海でシュノーケリングが楽しめます。",
+      "日本の統治時代の遺跡があります。"
+    ]
+  },
+
+  {
+    "name": "China",
+    "lat": 35.8617,
+    "lng": 104.1954,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "你好，你今天好吗？",
+      "我喜欢尝试各种地方的小吃。",
+      "中国的历史非常悠久。",
+      "你去过长城吗？"
+    ]
+  },
+  {
+    "name": "Singapore (Chinese population)",
+    "lat": 1.3521,
+    "lng": 103.8198,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "这里的人会说英语、华语和其它语言。",
+      "美食中心里有很多好吃的东西。",
+      "城市环境很整洁有序。",
+      "天气全年都很潮湿炎热。"
+    ]
+  },
+  {
+    "name": "Taiwan",
+    "lat": 23.6978,
+    "lng": 120.9605,
+    "voiceLang": "zh-TW",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "你好，这是一个美丽的岛屿。",
+      "夜市的小吃非常丰富。",
+      "台北101是著名的地标。",
+      "夏天会很热，但是有很多冷饮。"
+    ]
+  },
+  {
+    "name": "Malaysia (Chinese community)",
+    "lat": 4.2105,
+    "lng": 101.9758,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "马来西亚有很多华人社区。",
+      "美食融合了中餐和马来菜。",
+      "在吉隆坡能看到各种语言的标牌。",
+      "当地人非常友善好客。"
+    ]
+  },
+  {
+    "name": "Hong Kong",
+    "lat": 22.3193,
+    "lng": 114.1694,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "这里的粤语也很常用。",
+      "美食文化相当丰富。",
+      "购物是很多游客的主要活动。",
+      "高楼大厦与自然风光并存。"
+    ]
+  },
+  {
+    "name": "Macau (Chinese region)",
+    "lat": 22.1987,
+    "lng": 113.5439,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "也被称为“东方蒙特卡洛”。",
+      "葡萄牙文化有深刻的影响。",
+      "蛋挞非常有名。",
+      "观光和博彩业十分发达。"
+    ]
+  },
+  {
+    "name": "Indonesia (Chinese diaspora)",
+    "lat": -0.7893,
+    "lng": 113.9213,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "有大量华人社区分布在各地。",
+      "巴厘岛是著名的旅游胜地。",
+      "很多当地人能说一些中文。",
+      "小贩市场里有各种语言交汇。"
+    ]
+  },
+  {
+    "name": "Philippines (Chinese community)",
+    "lat": 12.8797,
+    "lng": 121.7740,
+    "voiceLang": "zh-CN",
+    "langGroup": "Chinese",
+    "sampleTexts": [
+      "华人的影响在饮食和商业中都能看到。",
+      "马尼拉唐人街历史悠久。",
+      "有时能看到中英文混合标识。",
+      "当地人与华人社区相处融洽。"
+    ]
+  },
+
+  {
+    "name": "Egypt",
+    "lat": 26.8206,
+    "lng": 30.8025,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "مرحبا، كيف حالك اليوم؟",
+      "الأهرامات من عجائب الدنيا.",
+      "النيل هو أطول نهر في أفريقيا.",
+      "الطقس حار وجاف في أغلب الأوقات."
+    ]
+  },
+  {
+    "name": "Saudi Arabia",
+    "lat": 23.8859,
+    "lng": 45.0792,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "أهلاً وسهلاً بك في المملكة.",
+      "الحج إلى مكة المكرمة مهم للمسلمين.",
+      "الطقس هنا حار وجاف.",
+      "اللغة العربية الفصحى تستخدم رسمياً."
+    ]
+  },
+  {
+    "name": "Morocco",
+    "lat": 31.7917,
+    "lng": -7.0926,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "مرحباً، هل تود بعض الشاي بالنعناع؟",
+      "الأسواق التقليدية رائعة في مراكش وفاس.",
+      "تتحدث الناس الدارجة المغربية أيضاً.",
+      "الطقس في الشمال معتدل وفي الصحراء حار."
+    ]
+  },
+  {
+    "name": "Tunisia",
+    "lat": 33.8869,
+    "lng": 9.5375,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "تونس العاصمة مدينة جميلة.",
+      "الشواطئ على البحر المتوسط مدهشة.",
+      "اللهجة التونسية مفهومة في المغرب العربي.",
+      "الكسكسي طبق مشهور."
+    ]
+  },
+  {
+    "name": "Algeria",
+    "lat": 28.0339,
+    "lng": 1.6596,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "هي أكبر دولة في أفريقيا من حيث المساحة.",
+      "يتحدث الناس العربية والفرنسية أيضاً.",
+      "الصحراء الجزائرية شاسعة جداً.",
+      "الطعام هنا لذيذ ومتعدد النكهات."
+    ]
+  },
+  {
+    "name": "Jordan",
+    "lat": 30.5852,
+    "lng": 36.2384,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "مرحباً بك في المملكة الأردنية.",
+      "البتراء من عجائب الشرق الأوسط.",
+      "المنسف هو طبق شعبي.",
+      "اللهجة الأردنية قريبة من اللهجة الشامية."
+    ]
+  },
+  {
+    "name": "United Arab Emirates",
+    "lat": 23.4241,
+    "lng": 53.8478,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "دبي مدينة معمارية مستقبلية.",
+      "أبوظبي عاصمة حديثة ومتطورة.",
+      "الطقس هنا حار ورطب صيفاً.",
+      "اللغة العربية رسمية، لكن الإنجليزية واسعة الاستخدام."
+    ]
+  },
+  {
+    "name": "Lebanon",
+    "lat": 33.8547,
+    "lng": 35.8623,
+    "voiceLang": "ar-SA",
+    "langGroup": "Arabic",
+    "sampleTexts": [
+      "بيروت تُعرف بباريس الشرق الأوسط.",
+      "التبولة والفتوش من السلطات الشهيرة.",
+      "تتحدث الناس العربية مع بعض الكلمات الفرنسية.",
+      "الجبل يتميز بالثلوج في الشتاء."
+    ]
+  },
+
+  {
+    "name": "India (Hindi)",
+    "lat": 20.5937,
+    "lng": 78.9629,
+    "voiceLang": "hi-IN",
+    "langGroup": "Hindi",
+    "sampleTexts": [
+      "नमस्ते, आपका दिन कैसा है?",
+      "मैं भारतीय खाना बहुत पसंद करता हूँ.",
+      "यहाँ की संस्कृतियाँ बेहद विविध हैं.",
+      "क्या आप ताज महल देखने गए हैं?"
+    ]
+  },
+  {
+    "name": "Fiji (Hindi-speaking community)",
+    "lat": -17.7134,
+    "lng": 178.0650,
+    "voiceLang": "hi-IN",
+    "langGroup": "Hindi",
+    "sampleTexts": [
+      "फिजी में भी बहुत से लोग हिंदी बोलते हैं.",
+      "इन द्वीपों पर दृश्य बहुत सुंदर हैं.",
+      "वहाँ की जीवनशैली काफी शांत है.",
+      "समुद्रतट और प्रकृति अद्भुत हैं."
+    ]
+  },
+  {
+    "name": "Mauritius (Hindi-speaking community)",
+    "lat": -20.3484,
+    "lng": 57.5522,
+    "voiceLang": "hi-IN",
+    "langGroup": "Hindi",
+    "sampleTexts": [
+      "नमस्कार, यह एक खूबसूरत द्वीप है.",
+      "यहाँ क्रेओल और अन्य भाषाएँ भी बोली जाती हैं.",
+      "समुद्रतट घूमने के लिए बढ़िया जगह है.",
+      "शादी और त्योहारों में भारतीय संस्कृति दिखती है."
+    ]
+  },
+  {
+    "name": "Suriname (Hindi-speaking community)",
+    "lat": 3.9193,
+    "lng": -56.0275,
+    "voiceLang": "hi-IN",
+    "langGroup": "Hindi",
+    "sampleTexts": [
+      "यहाँ बहुत से लोग भारतीय मूल के हैं.",
+      "डच भी आधिकारिक भाषा है.",
+      "जलवायु उष्णकटिबंधीय है और काफी नम.",
+      "महिला संगीत और नृत्य में भारतीय प्रभाव है."
+    ]
+  },
+
+  {
+    "name": "Thailand",
+    "lat": 15.8700,
+    "lng": 100.9925,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "สวัสดีครับ วันนี้เป็นยังไงบ้าง?",
+      "อาหารไทยมีรสชาติเผ็ดและอร่อยมาก.",
+      "กรุงเทพฯ เป็นเมืองที่ไม่เคยหลับใหล.",
+      "ผมชอบเที่ยวตามวัดและตลาดนัดกลางคืน."
+    ]
+  },
+  {
+    "name": "Laos (Thai similarity)",
+    "lat": 19.8563,
+    "lng": 102.4955,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "ภาษาลาวและไทยมีความใกล้เคียงกัน.",
+      "เวียงจันทน์คือเมืองหลวง.",
+      "ธรรมชาติและแม่น้ำโขงสวยมาก.",
+      "ผู้คนที่นี่อัธยาศัยดี."
+    ]
+  },
+  {
+    "name": "Cambodia (Thai diaspora)",
+    "lat": 12.5657,
+    "lng": 104.9910,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "มีคนไทยบางส่วนอาศัยตามแนวชายแดน.",
+      "นครวัดเป็นสถานที่ท่องเที่ยวระดับโลก.",
+      "สภาพอากาศร้อนชื้นตลอดปี.",
+      "วัฒนธรรมคล้ายคลึงกันบางส่วน."
+    ]
+  },
+  {
+    "name": "Myanmar (Thai diaspora)",
+    "lat": 21.9162,
+    "lng": 95.9560,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "ทางตอนใต้ติดกับประเทศไทย.",
+      "ภาษาพม่าแตกต่างจากไทย แต่มีบางส่วนเข้าใจไทย.",
+      "เจดีย์และวัดมีความงดงาม.",
+      "อากาศค่อนข้างร้อนชื้น."
+    ]
+  },
+  {
+    "name": "Malaysia (Thai community)",
+    "lat": 4.2105,
+    "lng": 101.9758,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "ทางภาคเหนือมีคนไทยอาศัยอยู่.",
+      "มีศาลเจ้าและวัดไทยบางแห่ง.",
+      "อาหารในมาเลเซียหลากหลายและอร่อย.",
+      "ภาษามลายูเป็นหลักแต่ภาษาไทยก็พบบ้าง."
+    ]
+  },
+  {
+    "name": "Vietnam (Thai diaspora)",
+    "lat": 14.0583,
+    "lng": 108.2772,
+    "voiceLang": "th-TH",
+    "langGroup": "Thai",
+    "sampleTexts": [
+      "ในบางพื้นที่มีคนไทยเชื้อสายโบราณ.",
+      "เวียดนามมีวิวสวยและอาหารอร่อย.",
+      "ภาษาเวียดนามต่างจากไทยพอสมควร.",
+      "ผู้คนที่นี่เป็นมิตรและใจกว้าง."
     ]
   }
 ]

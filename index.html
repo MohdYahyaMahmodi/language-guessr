@@ -142,7 +142,6 @@
 
     /*******************************************************
      * 4. MOBILE INFO (TOP-LEFT)
-     *    Only visible on mobile, replaces the hidden sidebar
      *******************************************************/
     #mobile-info {
       display: none; /* hidden by default, shown on mobile */
@@ -172,9 +171,8 @@
       position: relative;
     }
 
-    /* Lock the map so it doesn't wrap around horizontally */
     .leaflet-container {
-      background: #000;
+      background: #000; /* fallback if tiles don't load */
     }
 
     /*******************************************************
@@ -187,7 +185,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      z-index: 1001; /* Above the map tiles */
+      z-index: 1001;
     }
 
     .btn {
@@ -199,15 +197,17 @@
       font-size: 1rem;
       cursor: pointer;
     }
+
     .btn:hover {
       background: #333;
     }
+
     .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
 
-    /* Make buttons bigger on mobile */
+    /* Larger buttons on mobile */
     @media (max-width: 768px) {
       .btn {
         font-size: 1.2rem;
@@ -259,7 +259,7 @@
       background: #222;
     }
 
-    /* Make modal bigger on mobile (up to 90% width) */
+    /* Bigger modal on mobile */
     @media (max-width: 768px) {
       .modal {
         width: 90%;
@@ -272,7 +272,6 @@
         font-size: 1rem;
       }
     }
-
   </style>
 </head>
 <body>
@@ -292,7 +291,7 @@
       <div class="previous-rounds" id="previous-rounds"></div>
     </aside>
 
-    <!-- Mobile Info (shows only on mobile) -->
+    <!-- Mobile Info (only on mobile) -->
     <div id="mobile-info">
       <p><strong>Round:</strong> <span id="round-num-mobile">1</span> / <span id="total-rounds-mobile">5</span></p>
       <p><strong>Score:</strong> <span id="score-mobile">0</span></p>
@@ -326,86 +325,91 @@
 
   <script>
     /********************************************************
-     * 1. GLOBAL CONSTANTS & STATE
+     * 1. CONSTANTS & STATE
      ********************************************************/
-    const TOTAL_ROUNDS = 5; // Number of rounds
+    const TOTAL_ROUNDS = 5;       // Number of rounds
     const MAX_DISTANCE_KM = 1000; // Threshold for awarding points
 
-    let COUNTRIES = []; // Will be loaded from JSON
+    let ALL_COUNTRIES = [];  // Full list from JSON
+    let availableCountries = []; // Countries we can pick from (to avoid immediate repeats)
+
     let score = 0;
     let round = 1;
-    let currentCountry = null;
+    let currentCountry = null; // The chosen country for this round
 
     let map = null;
-    let guessMarker = null; // Player's guess
-    let correctMarker = null; // Correct location marker
+    let guessMarker = null;
+    let correctMarker = null;
 
-    // Each entry: { roundNumber, countryName, isCorrect }
+    // Keep track of round results: { roundNumber, countryName, isCorrect }
     const roundResults = [];
 
     /********************************************************
-     * 2. INITIALIZE THE MAP
-     *    - Using standard OSM tile layer
-     *    - Lock map boundaries so there's no horizontal wrap
+     * 2. MAP INIT
      ********************************************************/
-    function initMap() {
-      map = L.map("map", {
-        worldCopyJump: false, // no repeated wraps
-        maxBoundsViscosity: 1.0
-      }).setView([20, 0], 2);
+     function initMap() {
+  map = L.map("map", {
+    worldCopyJump: false,
+    maxBoundsViscosity: 1.0,
+    minZoom: 2,  // Add this line to prevent zooming out too far
+  }).setView([20, 0], 2);
 
-      // Restrict the map from panning infinitely
-      map.setMaxBounds([
-        [-85, -180],
-        [85, 180]
-      ]);
+  // Restrict the map from panning infinitely
+  map.setMaxBounds([
+    [-85, -180],
+    [85, 180]
+  ]);
 
-      // Standard OSM tile layer (not dark)
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 19
-      }).addTo(map);
-
-      // On map click, place or move the guess marker
-      map.on("click", onMapClick);
+  // Add minZoom to the tile layer as well
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors & <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 19,
+      minZoom: 2  // Add this line to ensure tiles match map zoom restrictions
     }
+  ).addTo(map);
 
-    function onMapClick(e) {
-      if (!guessMarker) {
-        guessMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
-      } else {
-        guessMarker.setLatLng(e.latlng);
-      }
-      // Enable "Confirm Guess" once a marker is placed
-      document.getElementById("confirm-btn").disabled = false;
+  map.on("click", (e) => {
+        if (!guessMarker) {
+          guessMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
+        } else {
+          guessMarker.setLatLng(e.latlng);
+        }
+        document.getElementById("confirm-btn").disabled = false;
+      });
     }
 
     /********************************************************
-     * 3. GAME FUNCTIONS
+     * 3. GAME FLOW
      ********************************************************/
     function startGame() {
-      // Start first round
+      // Initialize round/score
       round = 1;
       score = 0;
-      document.getElementById("score").textContent = "0";
-      document.getElementById("score-mobile").textContent = "0";
-      roundResults.length = 0; // Clear old results
+      updateScoreUI();
+
+      // Copy all countries into available pool
+      availableCountries = [...ALL_COUNTRIES];
+
+      // Clear any prior results
+      roundResults.length = 0;
+      renderPreviousRounds();
 
       startRound();
     }
 
     function startRound() {
-      // Update UI for desktop
+      // Update round UI
       document.getElementById("round-num").textContent = round;
       document.getElementById("total-rounds").textContent = TOTAL_ROUNDS;
-      // Update UI for mobile
       document.getElementById("round-num-mobile").textContent = round;
       document.getElementById("total-rounds-mobile").textContent = TOTAL_ROUNDS;
 
       document.getElementById("confirm-btn").disabled = true;
 
-      // Clear any old markers from previous round
+      // Clear markers
       if (guessMarker) {
         map.removeLayer(guessMarker);
         guessMarker = null;
@@ -415,65 +419,76 @@
         correctMarker = null;
       }
 
-      // Pick a random country from the loaded JSON
+      // Pick a random country from the available pool
       currentCountry =
-        COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)];
+        availableCountries[Math.floor(Math.random() * availableCountries.length)];
+      console.log("DEBUG: Chosen country => ", currentCountry.name);
 
-      console.log("DEBUG: Correct country:", currentCountry.name);
+      // Remove that country so it won't repeat next round
+      availableCountries = availableCountries.filter(
+        (c) => c.name !== currentCountry.name
+      );
     }
 
-    // Text-to-speech
     function playSound() {
       if (!currentCountry) return;
 
-      // Pick a random phrase from the sampleTexts
+      // Choose a random phrase
       const { sampleTexts, voiceLang } = currentCountry;
-      const randomText =
+      const randomPhrase =
         sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
 
-      const utterance = new SpeechSynthesisUtterance(randomText);
+      const utterance = new SpeechSynthesisUtterance(randomPhrase);
 
-      // Attempt to set a matching voice, if available
+      // Try to set matching voice
       const voices = speechSynthesis.getVoices();
-      const selectedVoice = voices.find((v) => v.lang === voiceLang);
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
+      const foundVoice = voices.find((v) => v.lang === voiceLang);
+      if (foundVoice) {
+        utterance.voice = foundVoice;
       } else {
-        console.warn(
-          "No exact voice match found for",
-          voiceLang,
-          "Falling back to default."
-        );
+        console.warn("No exact voice match for", voiceLang, "using default.");
       }
 
       speechSynthesis.speak(utterance);
     }
 
-    // Confirm guess, calculate distance, show result
     function confirmGuess() {
       if (!guessMarker || !currentCountry) return;
 
+      // Check if guess is near any country with the same language group
       const guessLatLng = guessMarker.getLatLng();
-      const distance = haversineDistance(
-        [guessLatLng.lat, guessLatLng.lng],
-        [currentCountry.lat, currentCountry.lng]
+      const chosenLangGroup = currentCountry.langGroup;
+
+      // All countries that share this language group
+      const sameLangCountries = ALL_COUNTRIES.filter(
+        (c) => c.langGroup === chosenLangGroup
       );
 
-      let pointsAwarded = 0;
       let isCorrect = false;
-
-      if (distance <= MAX_DISTANCE_KM) {
-        pointsAwarded = 100;
-        isCorrect = true;
+      let distanceToChosen = Infinity;
+      for (let country of sameLangCountries) {
+        const dist = haversineDistance(
+          [guessLatLng.lat, guessLatLng.lng],
+          [country.lat, country.lng]
+        );
+        distanceToChosen = Math.min(distanceToChosen, dist);
+        if (dist <= MAX_DISTANCE_KM) {
+          isCorrect = true;
+          break;
+        }
       }
 
-      score += pointsAwarded;
-      document.getElementById("score").textContent = score.toString();
-      document.getElementById("score-mobile").textContent = score.toString();
+      let pointsAwarded = 0;
+      if (isCorrect) {
+        pointsAwarded = 100;
+        score += pointsAwarded;
+      }
 
-      // Show correct location
+      updateScoreUI();
+
+      // Show the chosen country's location
       correctMarker = L.marker([currentCountry.lat, currentCountry.lng], {
-        title: "Correct Location"
+        title: "Correct Country"
       }).addTo(map);
 
       // Prepare modal
@@ -482,17 +497,16 @@
 
       if (isCorrect) {
         modalTitle.textContent = "Correct!";
-        modalMsg.textContent = `You were ${distance.toFixed(
+        modalMsg.textContent = `You were ${distanceToChosen.toFixed(
           1
         )} km away. +${pointsAwarded} points.`;
       } else {
         modalTitle.textContent = "Wrong!";
-        modalMsg.textContent = `You were ${distance.toFixed(
-          1
-        )} km away. No points awarded.`;
+        modalMsg.textContent = `The correct country was ${currentCountry.name}.
+          You were ${distanceToChosen.toFixed(1)} km away. No points awarded.`;
       }
 
-      // Record round result
+      // Store result
       roundResults.push({
         roundNumber: round,
         countryName: currentCountry.name,
@@ -506,6 +520,14 @@
     function nextRound() {
       closeModal();
       round++;
+
+      // Re-insert the previously used country into the pool
+      // so it might appear later, but won't appear immediately
+      // in back-to-back rounds
+      if (currentCountry) {
+        availableCountries.push(currentCountry);
+      }
+
       if (round > TOTAL_ROUNDS) {
         showFinalScore();
       } else {
@@ -518,16 +540,22 @@
       const modalMsg = document.getElementById("modal-msg");
 
       modalTitle.textContent = "Game Over!";
-      modalMsg.textContent = `Your final score is ${score}. Refresh or start again to play again.`;
+      modalMsg.textContent = `Your final score is ${score}. Refresh or start again to play!`;
 
       openModal();
       document.getElementById("modal-close-btn").style.display = "none";
-      // Disable main buttons
       document.getElementById("play-sound-btn").disabled = true;
       document.getElementById("confirm-btn").disabled = true;
     }
 
-    // Update the "previous rounds" list in the sidebar
+    /********************************************************
+     * 4. UI UPDATES
+     ********************************************************/
+    function updateScoreUI() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("score-mobile").textContent = score;
+    }
+
     function renderPreviousRounds() {
       const container = document.getElementById("previous-rounds");
       container.innerHTML = "";
@@ -546,7 +574,7 @@
     }
 
     /********************************************************
-     * 4. MODAL
+     * 5. MODAL
      ********************************************************/
     function openModal() {
       document.getElementById("modal-backdrop").style.display = "flex";
@@ -558,10 +586,10 @@
     }
 
     /********************************************************
-     * 5. HELPER: HAVERSINE DISTANCE
+     * 6. DISTANCE HELPER
      ********************************************************/
     function haversineDistance([lat1, lon1], [lat2, lon2]) {
-      const R = 6371; // Earth radius in km
+      const R = 6371; // Earth radius (km)
       const dLat = toRad(lat2 - lat1);
       const dLon = toRad(lon2 - lon1);
       const radLat1 = toRad(lat1);
@@ -583,24 +611,23 @@
     }
 
     /********************************************************
-     * 6. ON LOAD
+     * 7. ON LOAD
      ********************************************************/
     window.addEventListener("load", () => {
       initMap();
 
-      // 1) Fetch countries data from JSON (same folder)
+      // Fetch countries data from JSON
       fetch("./countries.json")
         .then((res) => res.json())
         .then((data) => {
-          COUNTRIES = data;
-          // 2) Now we have data, start the game
+          ALL_COUNTRIES = data;
           startGame();
         })
         .catch((err) => {
           console.error("Error loading countries.json:", err);
         });
 
-      // Wire up buttons
+      // Button event handlers
       document
         .getElementById("play-sound-btn")
         .addEventListener("click", playSound);
