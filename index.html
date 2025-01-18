@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Language Guessr</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <style>
+    /* Basic Reset and Layout */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1rem;
+      text-align: center;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #game-container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
+
+    #sidebar {
+      width: 300px;
+      max-width: 300px;
+      min-width: 200px;
+      background: #fff;
+      padding: 1rem;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    /* Sidebar Elements */
+    .game-info {
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #007bff;
+      color: #fff;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none; /* Hidden by default */
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 80%;
+      text-align: center;
+    }
+
+    .modal h2 {
+      margin-bottom: 1rem;
+    }
+
+    .modal p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .modal .btn {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Language Guessr</h1>
+    <p>Listen to the spoken language, then drop a pin on the map to guess the correct country.</p>
+  </header>
+
+  <div id="game-container">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="game-info">
+        <p>Round: <span id="round-num">1</span> / 5</p>
+        <p>Score: <span id="score">0</span></p>
+      </div>
+
+      <div>
+        <button class="btn" id="play-sound-btn">Play Sound</button>
+        <button class="btn" id="confirm-btn" disabled>Confirm Guess</button>
+      </div>
+    </aside>
+
+    <!-- Map Section -->
+    <div id="map"></div>
+  </div>
+
+  <!-- Modal for results or notifications -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal" id="modal-content">
+      <h2 id="modal-title"></h2>
+      <p id="modal-msg"></p>
+      <button class="btn" id="modal-close-btn">Next</button>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    /************************************************************
+     * 1. COUNTRY & LANGUAGE DATA
+     *    Here we define some sample countries with:
+     *      - name
+     *      - lat/lng (approx center)
+     *      - voiceLang (valid language code for speech)
+     *      - sampleText (what the TTS will say)
+     ************************************************************/
+    const COUNTRIES = [
+      {
+        name: "France",
+        lat: 46.2276,
+        lng: 2.2137,
+        voiceLang: "fr-FR",
+        sampleText: "Bonjour et bienvenue en France!"
+      },
+      {
+        name: "Spain",
+        lat: 40.4637,
+        lng: -3.7492,
+        voiceLang: "es-ES",
+        sampleText: "Hola, bienvenido a España!"
+      },
+      {
+        name: "Germany",
+        lat: 51.1657,
+        lng: 10.4515,
+        voiceLang: "de-DE",
+        sampleText: "Hallo, willkommen in Deutschland!"
+      },
+      {
+        name: "Italy",
+        lat: 41.8719,
+        lng: 12.5674,
+        voiceLang: "it-IT",
+        sampleText: "Ciao e benvenuto in Italia!"
+      },
+      {
+        name: "Brazil",
+        lat: -14.2350,
+        lng: -51.9253,
+        voiceLang: "pt-BR",
+        sampleText: "Olá, bem-vindo ao Brasil!"
+      },
+      {
+        name: "Japan",
+        lat: 36.2048,
+        lng: 138.2529,
+        voiceLang: "ja-JP",
+        sampleText: "こんにちは、日本へようこそ!"
+      },
+      // Add more if you like
+    ];
+
+    const TOTAL_ROUNDS = 5;
+    const MAX_DISTANCE_KM = 1000; // threshold for being considered "correct"
+
+    /************************************************************
+     * 2. GAME STATE
+     ************************************************************/
+    let score = 0;
+    let round = 1;
+    let currentCountry = null;
+    let map = null;
+    let guessMarker = null;   // Marker for player's guess
+    let correctMarker = null; // Marker for correct location
+
+    /************************************************************
+     * 3. INITIALIZE THE MAP (Leaflet)
+     ************************************************************/
+    function initMap() {
+      // Create the map, center on Earth with a low zoom to see many countries
+      map = L.map('map').setView([20, 0], 2);
+
+      // Add the OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution:
+          'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      // When user clicks on the map, place or move the guessMarker
+      map.on('click', onMapClick);
+    }
+
+    function onMapClick(e) {
+      // e.latlng contains the latitude and longitude of the point clicked
+      if (!guessMarker) {
+        guessMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
+      } else {
+        guessMarker.setLatLng(e.latlng);
+      }
+      // Once the user has placed a guess, enable the "Confirm" button
+      document.getElementById("confirm-btn").disabled = false;
+    }
+
+    /************************************************************
+     * 4. START A NEW ROUND
+     ************************************************************/
+    function startRound() {
+      document.getElementById("round-num").textContent = round;
+      document.getElementById("confirm-btn").disabled = true;
+
+      // Clear any old markers
+      if (guessMarker) {
+        map.removeLayer(guessMarker);
+        guessMarker = null;
+      }
+      if (correctMarker) {
+        map.removeLayer(correctMarker);
+        correctMarker = null;
+      }
+
+      // Pick a random country from the list
+      currentCountry = COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)];
+      console.log("DEBUG: The correct country is:", currentCountry.name);
+    }
+
+    /************************************************************
+     * 5. PLAY SOUND (text-to-speech)
+     ************************************************************/
+    function playSound() {
+      if (!currentCountry) return;
+      const utterance = new SpeechSynthesisUtterance(currentCountry.sampleText);
+
+      // Attempt to set the voice if the browser supports it
+      // This logic tries to find a voice that matches voiceLang
+      const availableVoices = speechSynthesis.getVoices();
+      const selectedVoice = availableVoices.find(
+        (voice) => voice.lang === currentCountry.voiceLang
+      );
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      } else {
+        // fallback to default voice if the exact language is not found
+        console.warn("No exact voice match found; falling back to default.");
+      }
+
+      // Speak
+      speechSynthesis.speak(utterance);
+    }
+
+    /************************************************************
+     * 6. CONFIRM GUESS
+     *    - Calculate distance from guess to the correct location
+     *    - If within threshold => add points
+     *    - Show modal with result
+     ************************************************************/
+    function confirmGuess() {
+      if (!guessMarker || !currentCountry) return;
+
+      const guessLatLng = guessMarker.getLatLng();
+      const distance = haversineDistance(
+        [guessLatLng.lat, guessLatLng.lng],
+        [currentCountry.lat, currentCountry.lng]
+      );
+
+      let pointsAwarded = 0;
+      let isCorrect = false;
+      if (distance <= MAX_DISTANCE_KM) {
+        // You can scale points by distance if you want
+        // For simplicity, let's do a flat 100 points if within threshold
+        pointsAwarded = 100;
+        isCorrect = true;
+      }
+
+      score += pointsAwarded;
+      document.getElementById("score").textContent = score;
+
+      // Show the correct location on the map
+      correctMarker = L.marker([currentCountry.lat, currentCountry.lng], {
+        title: "Correct location",
+      }).addTo(map);
+
+      // Show the result in a modal
+      const modalTitle = document.getElementById("modal-title");
+      const modalMsg = document.getElementById("modal-msg");
+
+      if (isCorrect) {
+        modalTitle.textContent = "Correct!";
+        modalMsg.textContent = `You were ${distance.toFixed(
+          1
+        )} km away. You earned ${pointsAwarded} points.`;
+      } else {
+        modalTitle.textContent = "Wrong!";
+        modalMsg.textContent = `You were ${distance.toFixed(
+          1
+        )} km away. No points awarded.`;
+      }
+
+      openModal();
+    }
+
+    /************************************************************
+     * 7. NEXT ROUND OR END GAME
+     ************************************************************/
+    function nextRound() {
+      closeModal();
+      round++;
+      if (round > TOTAL_ROUNDS) {
+        // Game over, show final score
+        showFinalScore();
+      } else {
+        startRound();
+      }
+    }
+
+    function showFinalScore() {
+      // Instead of nextRound, we can show a final message in the modal
+      const modalTitle = document.getElementById("modal-title");
+      const modalMsg = document.getElementById("modal-msg");
+      modalTitle.textContent = "Game Over!";
+      modalMsg.textContent = `Your final score is ${score}. Refresh the page to play again.`;
+
+      openModal();
+      // Hide the next button
+      document.getElementById("modal-close-btn").style.display = "none";
+      document.getElementById("play-sound-btn").disabled = true;
+      document.getElementById("confirm-btn").disabled = true;
+    }
+
+    /************************************************************
+     * 8. MODAL HANDLING
+     ************************************************************/
+    function openModal() {
+      document.getElementById("modal-backdrop").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal-backdrop").style.display = "none";
+    }
+
+    /************************************************************
+     * 9. DISTANCE CALCULATION (Haversine)
+     *    Returns distance in kilometers between two lat/lng points
+     ************************************************************/
+    function haversineDistance([lat1, lon1], [lat2, lon2]) {
+      const R = 6371; // Earth radius in km
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const radLat1 = toRad(lat1);
+      const radLat2 = toRad(lat2);
+
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) *
+          Math.sin(dLon / 2) *
+          Math.cos(radLat1) *
+          Math.cos(radLat2);
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+
+      function toRad(value) {
+        return (value * Math.PI) / 180;
+      }
+    }
+
+    /************************************************************
+     * 10. ON LOAD
+     ************************************************************/
+    window.addEventListener('load', () => {
+      // Initialize the map
+      initMap();
+
+      // Start the first round
+      startRound();
+
+      // Wire up buttons
+      document.getElementById("play-sound-btn").addEventListener("click", playSound);
+      document.getElementById("confirm-btn").addEventListener("click", confirmGuess);
+      document.getElementById("modal-close-btn").addEventListener("click", nextRound);
+    });
+  </script>
+</body>
+</html>
