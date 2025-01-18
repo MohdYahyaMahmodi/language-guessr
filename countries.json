@@ -1,0 +1,122 @@
+[
+  {
+    "name": "France",
+    "lat": 46.2276,
+    "lng": 2.2137,
+    "voiceLang": "fr-FR",
+    "sampleTexts": [
+      "J'aime voyager et rencontrer de nouvelles personnes.",
+      "Le fromage et le pain sont mes aliments préférés.",
+      "Il fait très beau aujourd'hui, n'est-ce pas ?",
+      "Je suis ravi de faire votre connaissance."
+    ]
+  },
+  {
+    "name": "Spain",
+    "lat": 40.4637,
+    "lng": -3.7492,
+    "voiceLang": "es-ES",
+    "sampleTexts": [
+      "Me encanta escuchar música y bailar.",
+      "¿Dónde está la estación de tren más cercana?",
+      "Este lugar es muy bonito y tranquilo.",
+      "¡Qué día tan maravilloso tenemos hoy!"
+    ]
+  },
+  {
+    "name": "Germany",
+    "lat": 51.1657,
+    "lng": 10.4515,
+    "voiceLang": "de-DE",
+    "sampleTexts": [
+      "Ich trinke gern Kaffee am Morgen.",
+      "Wo ist das nächste Museum?",
+      "Das Wetter ist heute wirklich angenehm.",
+      "Ich lerne gerade eine neue Sprache."
+    ]
+  },
+  {
+    "name": "Italy",
+    "lat": 41.8719,
+    "lng": 12.5674,
+    "voiceLang": "it-IT",
+    "sampleTexts": [
+      "Amo la pasta e la pizza!",
+      "Che bella giornata per una passeggiata.",
+      "Stavo leggendo un libro molto interessante.",
+      "Mi piace incontrare gente nuova."
+    ]
+  },
+  {
+    "name": "Brazil",
+    "lat": -14.2350,
+    "lng": -51.9253,
+    "voiceLang": "pt-BR",
+    "sampleTexts": [
+      "Eu adoro dançar e cantar no chuveiro.",
+      "Onde fica a padaria mais próxima?",
+      "O clima está muito agradável hoje.",
+      "Estou animado para conhecer pessoas diferentes."
+    ]
+  },
+  {
+    "name": "Japan",
+    "lat": 36.2048,
+    "lng": 138.2529,
+    "voiceLang": "ja-JP",
+    "sampleTexts": [
+      "毎朝お茶を飲むのが大好きです。",
+      "近くに有名なレストランはありますか？",
+      "今日は本当にいい天気ですね。",
+      "新しい趣味を探しているところです。"
+    ]
+  },
+  {
+    "name": "Sweden",
+    "lat": 60.1282,
+    "lng": 18.6435,
+    "voiceLang": "sv-SE",
+    "sampleTexts": [
+      "Hej! Hur mår du idag?",
+      "Jag gillar att fika och dricka kaffe.",
+      "Det är en vacker dag för en promenad.",
+      "Välkommen till vårt land!"
+    ]
+  },
+  {
+    "name": "Russia",
+    "lat": 61.5240,
+    "lng": 105.3188,
+    "voiceLang": "ru-RU",
+    "sampleTexts": [
+      "Как дела? Я рад познакомиться.",
+      "Где находится ближайшая автобусная остановка?",
+      "Сегодня очень хорошая погода.",
+      "Я изучаю иностранные языки."
+    ]
+  },
+  {
+    "name": "Turkey",
+    "lat": 38.9637,
+    "lng": 35.2433,
+    "voiceLang": "tr-TR",
+    "sampleTexts": [
+      "Merhaba, nasılsınız?",
+      "Bu şehir çok güzel ve tarihî.",
+      "Hava bugün gerçekten harika.",
+      "Yeni insanlarla tanışmayı seviyorum."
+    ]
+  },
+  {
+    "name": "Korea",
+    "lat": 36.0,
+    "lng": 128.0,
+    "voiceLang": "ko-KR",
+    "sampleTexts": [
+      "안녕하세요, 만나서 반갑습니다.",
+      "가장 가까운 지하철역이 어디예요?",
+      "오늘 날씨가 정말 좋네요.",
+      "새로운 문화를 배우는 것을 좋아해요."
+    ]
+  }
+]

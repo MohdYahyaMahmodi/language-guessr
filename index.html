@@ -5,108 +5,113 @@
   <title>Language Guessr</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Leaflet CSS -->
-  <link 
-    rel="stylesheet" 
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   />
 
   <style>
-    /* ------------------------------- 
-       1. RESET & GLOBAL STYLES
-    --------------------------------- */
+    /*******************************************************
+     * 1. RESET & GLOBAL
+     *******************************************************/
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #74ABE2, #5563DE);
-      color: #333;
+      background: #000; /* Pure black background for the overall UI */
+      font-family: "Montserrat", sans-serif;
+      color: #fff;
     }
 
-    /* Smooth transitions for hover effects */
-    a, button {
+    a,
+    button {
       transition: all 0.3s ease;
     }
 
-    /* Hide default Leaflet attribution text shadow */
-    .leaflet-control-attribution {
-      text-shadow: none;
-    }
-
-    /* ------------------------------- 
-       2. PAGE LAYOUT
-    --------------------------------- */
+    /*******************************************************
+     * 2. LAYOUT
+     *******************************************************/
     body {
       display: flex;
       flex-direction: column;
     }
 
     header {
+      background: #000;
       text-align: center;
       padding: 1rem 0;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-bottom: 1px solid #444;
     }
 
     header h1 {
       font-size: 1.8rem;
       margin-bottom: 0.25rem;
-      color: #333;
+      color: #fff;
     }
 
     header p {
-      color: #666;
+      color: #aaa;
       font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+      header p {
+        font-size: 0.85rem;
+      }
     }
 
     #game-container {
       flex: 1;
       display: flex;
       flex-direction: row;
-      overflow: hidden;
+      position: relative;
     }
 
-    /* ------------------------------- 
-       3. SIDEBAR
-    --------------------------------- */
+    /*******************************************************
+     * 3. SIDEBAR - Visible on desktop, hidden on mobile
+     *******************************************************/
     #sidebar {
-      width: 320px;
-      max-width: 320px;
-      min-width: 240px;
-      background: #fdfdfd;
+      width: 300px;
+      background: #111;
+      border-right: 1px solid #444;
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      z-index: 1000; /* Sit on top of map if needed */
+      justify-content: start;
+      overflow-y: auto;
     }
 
     .game-info {
       margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
     }
 
     .game-info p {
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
-    /* Previous Rounds List */
     .previous-rounds {
       margin-top: 1rem;
-      border-top: 1px solid #eee;
       padding-top: 1rem;
+      border-top: 1px solid #444;
       flex: 1;
-      overflow-y: auto;
     }
 
     .round-result {
@@ -114,126 +119,192 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-    .round-result span {
-      font-size: 1.2rem;
-      margin-left: 0.5rem;
-    }
-    .round-result.success span {
-      color: green;
-    }
-    .round-result.fail span {
-      color: red;
     }
 
-    /* ------------------------------- 
-       4. MAP
-    --------------------------------- */
+    .round-result span {
+      font-size: 1rem;
+    }
+
+    .round-result.success span:last-child {
+      color: #32cd32; /* lime green check */
+    }
+
+    .round-result.fail span:last-child {
+      color: #ff4444; /* red X */
+    }
+
+    @media (max-width: 768px) {
+      #sidebar {
+        display: none; /* Hide on mobile */
+      }
+    }
+
+    /*******************************************************
+     * 4. MOBILE INFO (TOP-LEFT)
+     *    Only visible on mobile, replaces the hidden sidebar
+     *******************************************************/
+    #mobile-info {
+      display: none; /* hidden by default, shown on mobile */
+    }
+    @media (max-width: 768px) {
+      #mobile-info {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(17, 17, 17, 0.8);
+        padding: 0.8rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        z-index: 1002;
+      }
+      #mobile-info p {
+        margin-bottom: 0.2rem;
+      }
+    }
+
+    /*******************************************************
+     * 5. MAP
+     *******************************************************/
     #map {
       flex: 1;
       position: relative;
     }
 
-    #map .leaflet-tile {
-      filter: brightness(0.95);
+    /* Lock the map so it doesn't wrap around horizontally */
+    .leaflet-container {
+      background: #000;
     }
 
-    /* ------------------------------- 
-       5. BUTTONS
-    --------------------------------- */
+    /*******************************************************
+     * 6. MAP CONTROLS (BOTTOM-RIGHT)
+     *******************************************************/
+    .map-controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 1001; /* Above the map tiles */
+    }
+
     .btn {
-      display: inline-block;
-      background: #5563DE;
+      background: #222;
       color: #fff;
-      padding: 0.75rem 1.25rem;
-      border: none;
+      border: 1px solid #444;
       border-radius: 4px;
-      text-align: center;
-      cursor: pointer;
+      padding: 0.75rem 1.25rem;
       font-size: 1rem;
-      text-decoration: none;
-      margin-bottom: 0.5rem;
+      cursor: pointer;
     }
-
     .btn:hover {
-      background-color: #4652c8;
+      background: #333;
     }
-
     .btn:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
-    /* ------------------------------- 
-       6. MODAL
-    --------------------------------- */
+    /* Make buttons bigger on mobile */
+    @media (max-width: 768px) {
+      .btn {
+        font-size: 1.2rem;
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    /*******************************************************
+     * 7. MODAL
+     *******************************************************/
     .modal-backdrop {
       position: fixed;
-      top: 0; 
+      top: 0;
       left: 0;
-      width: 100%; 
+      width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none; /* Hidden by default */
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
 
     .modal {
-      background: #fff;
+      background: #111;
+      color: #fff;
       padding: 2rem;
       border-radius: 8px;
-      max-width: 400px;
+      max-width: 500px;
       width: 80%;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .modal h2 {
       margin-bottom: 1rem;
-      font-size: 1.4rem;
-      color: #333;
+      font-size: 1.6rem;
+      color: #fff;
     }
 
     .modal p {
       margin-bottom: 1rem;
-      font-size: 1rem;
-      color: #555;
+      font-size: 1.1rem;
+      color: #aaa;
     }
 
     .modal .btn {
       margin-top: 0.5rem;
+      background: #222;
     }
+
+    /* Make modal bigger on mobile (up to 90% width) */
+    @media (max-width: 768px) {
+      .modal {
+        width: 90%;
+        padding: 2rem 1.5rem;
+      }
+      .modal h2 {
+        font-size: 1.4rem;
+      }
+      .modal p {
+        font-size: 1rem;
+      }
+    }
+
   </style>
 </head>
 <body>
   <header>
     <h1>Language Guessr</h1>
-    <p>Listen to the spoken language, then drop a pin on the map to guess the country!</p>
+    <p>Listen to the language and drop your pin on the map!</p>
   </header>
 
   <div id="game-container">
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR (hidden on mobile) -->
     <aside id="sidebar">
-      <div>
-        <div class="game-info">
-          <p><strong>Round:</strong> <span id="round-num">1</span> / <span id="total-rounds">5</span></p>
-          <p><strong>Score:</strong> <span id="score">0</span></p>
-        </div>
-
-        <!-- Buttons -->
-        <button class="btn" id="play-sound-btn">Play Sound</button>
-        <button class="btn" id="confirm-btn" disabled>Confirm Guess</button>
-
-        <!-- List of Previous Rounds -->
-        <div class="previous-rounds" id="previous-rounds"></div>
+      <div class="game-info">
+        <p><strong>Round:</strong> <span id="round-num">1</span> / <span id="total-rounds">5</span></p>
+        <p><strong>Score:</strong> <span id="score">0</span></p>
       </div>
+
+      <div class="previous-rounds" id="previous-rounds"></div>
     </aside>
+
+    <!-- Mobile Info (shows only on mobile) -->
+    <div id="mobile-info">
+      <p><strong>Round:</strong> <span id="round-num-mobile">1</span> / <span id="total-rounds-mobile">5</span></p>
+      <p><strong>Score:</strong> <span id="score-mobile">0</span></p>
+    </div>
 
     <!-- MAP -->
     <div id="map"></div>
+
+    <!-- MAP CONTROLS (bottom-right) -->
+    <div class="map-controls">
+      <button class="btn" id="play-sound-btn">Play Sound</button>
+      <button class="btn" id="confirm-btn" disabled>Confirm Guess</button>
+    </div>
   </div>
 
   <!-- MODAL -->
@@ -246,130 +317,57 @@
   </div>
 
   <!-- Leaflet JS -->
-  <script 
+  <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-    crossorigin="">
-  </script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
 
   <script>
-    /**
-     * 1. COUNTRY & LANGUAGE DATA
-     * - name: name of the country
-     * - lat/lng: approximate center
-     * - voiceLang: valid speech code for the browser's Web Speech API
-     * - sampleTexts: an array of random phrases in that language, 
-     *                not referencing the country name
-     */
-    const COUNTRIES = [
-      {
-        name: "France",
-        lat: 46.2276,
-        lng: 2.2137,
-        voiceLang: "fr-FR",
-        sampleTexts: [
-          "J'aime voyager et rencontrer de nouvelles personnes.",
-          "Le fromage et le pain sont mes aliments préférés.",
-          "Il fait très beau aujourd'hui, n'est-ce pas ?",
-          "Je suis ravi de faire votre connaissance."
-        ]
-      },
-      {
-        name: "Spain",
-        lat: 40.4637,
-        lng: -3.7492,
-        voiceLang: "es-ES",
-        sampleTexts: [
-          "Me encanta escuchar música y bailar.",
-          "¿Dónde está la estación de tren más cercana?",
-          "Este lugar es muy bonito y tranquilo.",
-          "¡Qué día tan maravilloso tenemos hoy!"
-        ]
-      },
-      {
-        name: "Germany",
-        lat: 51.1657,
-        lng: 10.4515,
-        voiceLang: "de-DE",
-        sampleTexts: [
-          "Ich trinke gern Kaffee am Morgen.",
-          "Wo ist das nächste Museum?",
-          "Das Wetter ist heute wirklich angenehm.",
-          "Ich lerne gerade eine neue Sprache."
-        ]
-      },
-      {
-        name: "Italy",
-        lat: 41.8719,
-        lng: 12.5674,
-        voiceLang: "it-IT",
-        sampleTexts: [
-          "Amo la pasta e la pizza!",
-          "Che bella giornata per una passeggiata.",
-          "Stavo leggendo un libro molto interessante.",
-          "Mi piace incontrare gente nuova."
-        ]
-      },
-      {
-        name: "Brazil",
-        lat: -14.2350,
-        lng: -51.9253,
-        voiceLang: "pt-BR",
-        sampleTexts: [
-          "Eu adoro dançar e cantar no chuveiro.",
-          "Onde fica a padaria mais próxima?",
-          "O clima está muito agradável hoje.",
-          "Estou animado para conhecer pessoas diferentes."
-        ]
-      },
-      {
-        name: "Japan",
-        lat: 36.2048,
-        lng: 138.2529,
-        voiceLang: "ja-JP",
-        sampleTexts: [
-          "毎朝お茶を飲むのが大好きです。",
-          "近くに有名なレストランはありますか？",
-          "今日は本当にいい天気ですね。",
-          "新しい趣味を探しているところです。"
-        ]
-      },
-      // Add more countries if you like...
-    ];
+    /********************************************************
+     * 1. GLOBAL CONSTANTS & STATE
+     ********************************************************/
+    const TOTAL_ROUNDS = 5; // Number of rounds
+    const MAX_DISTANCE_KM = 1000; // Threshold for awarding points
 
-    const TOTAL_ROUNDS = 5;       // how many rounds to play
-    const MAX_DISTANCE_KM = 1000; // threshold (km) for awarding points
-
-    /**
-     * 2. GAME STATE
-     */
+    let COUNTRIES = []; // Will be loaded from JSON
     let score = 0;
     let round = 1;
     let currentCountry = null;
-    let map = null;
-    let guessMarker = null;   // Marker for player's guess
-    let correctMarker = null; // Marker for correct location
 
-    // We'll store the results here to display in the sidebar
+    let map = null;
+    let guessMarker = null; // Player's guess
+    let correctMarker = null; // Correct location marker
+
     // Each entry: { roundNumber, countryName, isCorrect }
     const roundResults = [];
 
-    /**
-     * 3. INITIALIZE THE MAP (Leaflet)
-     */
+    /********************************************************
+     * 2. INITIALIZE THE MAP
+     *    - Using standard OSM tile layer
+     *    - Lock map boundaries so there's no horizontal wrap
+     ********************************************************/
     function initMap() {
-      // Create the map, center on Earth with a low zoom to see many countries
-      map = L.map('map').setView([20, 0], 2);
+      map = L.map("map", {
+        worldCopyJump: false, // no repeated wraps
+        maxBoundsViscosity: 1.0
+      }).setView([20, 0], 2);
 
-      // Add the OpenStreetMap tiles
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+      // Restrict the map from panning infinitely
+      map.setMaxBounds([
+        [-85, -180],
+        [85, 180]
+      ]);
+
+      // Standard OSM tile layer (not dark)
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 19
       }).addTo(map);
 
-      // When user clicks on the map, place or move the guessMarker
-      map.on('click', onMapClick);
+      // On map click, place or move the guess marker
+      map.on("click", onMapClick);
     }
 
     function onMapClick(e) {
@@ -378,20 +376,35 @@
       } else {
         guessMarker.setLatLng(e.latlng);
       }
-      // Once the user has placed a guess, enable the "Confirm" button
+      // Enable "Confirm Guess" once a marker is placed
       document.getElementById("confirm-btn").disabled = false;
     }
 
-    /**
-     * 4. START A NEW ROUND
-     */
+    /********************************************************
+     * 3. GAME FUNCTIONS
+     ********************************************************/
+    function startGame() {
+      // Start first round
+      round = 1;
+      score = 0;
+      document.getElementById("score").textContent = "0";
+      document.getElementById("score-mobile").textContent = "0";
+      roundResults.length = 0; // Clear old results
+
+      startRound();
+    }
+
     function startRound() {
-      // Update UI
+      // Update UI for desktop
       document.getElementById("round-num").textContent = round;
       document.getElementById("total-rounds").textContent = TOTAL_ROUNDS;
+      // Update UI for mobile
+      document.getElementById("round-num-mobile").textContent = round;
+      document.getElementById("total-rounds-mobile").textContent = TOTAL_ROUNDS;
+
       document.getElementById("confirm-btn").disabled = true;
 
-      // Clear any old markers
+      // Clear any old markers from previous round
       if (guessMarker) {
         map.removeLayer(guessMarker);
         guessMarker = null;
@@ -401,48 +414,41 @@
         correctMarker = null;
       }
 
-      // Pick a random country from the list
-      currentCountry = COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)];
+      // Pick a random country from the loaded JSON
+      currentCountry =
+        COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)];
 
-      console.log("DEBUG: The correct country is:", currentCountry.name);
+      console.log("DEBUG: Correct country:", currentCountry.name);
     }
 
-    /**
-     * 5. PLAY SOUND (text-to-speech)
-     *    - Select a random phrase from currentCountry.sampleTexts
-     *    - Use currentCountry.voiceLang as the TTS voice if available
-     */
+    // Text-to-speech
     function playSound() {
       if (!currentCountry) return;
 
-      // Pick a random phrase from the sampleTexts array
-      const texts = currentCountry.sampleTexts;
-      const randomText = texts[Math.floor(Math.random() * texts.length)];
+      // Pick a random phrase from the sampleTexts
+      const { sampleTexts, voiceLang } = currentCountry;
+      const randomText =
+        sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
 
       const utterance = new SpeechSynthesisUtterance(randomText);
 
-      // Attempt to set the voice if the browser supports it
-      const availableVoices = speechSynthesis.getVoices();
-      const selectedVoice = availableVoices.find(
-        (voice) => voice.lang === currentCountry.voiceLang
-      );
+      // Attempt to set a matching voice, if available
+      const voices = speechSynthesis.getVoices();
+      const selectedVoice = voices.find((v) => v.lang === voiceLang);
       if (selectedVoice) {
         utterance.voice = selectedVoice;
       } else {
-        console.warn("No exact voice match found for", currentCountry.voiceLang, ". Falling back to default.");
+        console.warn(
+          "No exact voice match found for",
+          voiceLang,
+          "Falling back to default."
+        );
       }
 
-      // Speak
       speechSynthesis.speak(utterance);
     }
 
-    /**
-     * 6. CONFIRM GUESS
-     *    - Calculate distance from guess to the correct location
-     *    - If within threshold => add points
-     *    - Show modal with result
-     *    - Store the result to display in the "previous rounds" list
-     */
+    // Confirm guess, calculate distance, show result
     function confirmGuess() {
       if (!guessMarker || !currentCountry) return;
 
@@ -454,22 +460,22 @@
 
       let pointsAwarded = 0;
       let isCorrect = false;
+
       if (distance <= MAX_DISTANCE_KM) {
-        // For simplicity, let's do a flat 100 points if within threshold
         pointsAwarded = 100;
         isCorrect = true;
       }
 
-      // Update total score
       score += pointsAwarded;
-      document.getElementById("score").textContent = score;
+      document.getElementById("score").textContent = score.toString();
+      document.getElementById("score-mobile").textContent = score.toString();
 
-      // Show the correct location on the map
+      // Show correct location
       correctMarker = L.marker([currentCountry.lat, currentCountry.lng], {
-        title: "Correct location",
+        title: "Correct Location"
       }).addTo(map);
 
-      // Prepare the modal
+      // Prepare modal
       const modalTitle = document.getElementById("modal-title");
       const modalMsg = document.getElementById("modal-msg");
 
@@ -477,7 +483,7 @@
         modalTitle.textContent = "Correct!";
         modalMsg.textContent = `You were ${distance.toFixed(
           1
-        )} km away. You earned ${pointsAwarded} points.`;
+        )} km away. +${pointsAwarded} points.`;
       } else {
         modalTitle.textContent = "Wrong!";
         modalMsg.textContent = `You were ${distance.toFixed(
@@ -485,7 +491,7 @@
         )} km away. No points awarded.`;
       }
 
-      // Save round result for the sidebar
+      // Record round result
       roundResults.push({
         roundNumber: round,
         countryName: currentCountry.name,
@@ -496,14 +502,10 @@
       openModal();
     }
 
-    /**
-     * 7. NEXT ROUND OR END GAME
-     */
     function nextRound() {
       closeModal();
       round++;
       if (round > TOTAL_ROUNDS) {
-        // Game over
         showFinalScore();
       } else {
         startRound();
@@ -515,52 +517,48 @@
       const modalMsg = document.getElementById("modal-msg");
 
       modalTitle.textContent = "Game Over!";
-      modalMsg.textContent = `Your final score is ${score}. Refresh the page to play again.`;
+      modalMsg.textContent = `Your final score is ${score}. Refresh or start again to play again.`;
 
       openModal();
-      // Hide the 'Next' button
       document.getElementById("modal-close-btn").style.display = "none";
       // Disable main buttons
       document.getElementById("play-sound-btn").disabled = true;
       document.getElementById("confirm-btn").disabled = true;
     }
 
-    /**
-     * 8. RENDER PREVIOUS ROUNDS
-     *    - Show each round with the country name and a check or X
-     */
+    // Update the "previous rounds" list in the sidebar
     function renderPreviousRounds() {
-      const container = document.getElementById('previous-rounds');
-      container.innerHTML = ""; // Clear current list
+      const container = document.getElementById("previous-rounds");
+      container.innerHTML = "";
 
-      roundResults.forEach((result) => {
-        const div = document.createElement('div');
-        div.classList.add('round-result');
-        div.classList.add(result.isCorrect ? 'success' : 'fail');
+      roundResults.forEach((res) => {
+        const div = document.createElement("div");
+        div.classList.add("round-result");
+        div.classList.add(res.isCorrect ? "success" : "fail");
 
         div.innerHTML = `
-          <span>Round ${result.roundNumber}: ${result.countryName}</span>
-          <span>${result.isCorrect ? '✔' : '✘'}</span>
+          <span>Round ${res.roundNumber}: ${res.countryName}</span>
+          <span>${res.isCorrect ? "✔" : "✘"}</span>
         `;
         container.appendChild(div);
       });
     }
 
-    /**
-     * 9. MODAL HANDLING
-     */
+    /********************************************************
+     * 4. MODAL
+     ********************************************************/
     function openModal() {
       document.getElementById("modal-backdrop").style.display = "flex";
     }
 
     function closeModal() {
       document.getElementById("modal-backdrop").style.display = "none";
+      document.getElementById("modal-close-btn").style.display = "inline-block";
     }
 
-    /**
-     * 10. DISTANCE CALCULATION (Haversine)
-     *     Returns distance in kilometers between two lat/lng points
-     */
+    /********************************************************
+     * 5. HELPER: HAVERSINE DISTANCE
+     ********************************************************/
     function haversineDistance([lat1, lon1], [lat2, lon2]) {
       const R = 6371; // Earth radius in km
       const dLat = toRad(lat2 - lat1);
@@ -583,17 +581,34 @@
       }
     }
 
-    /**
-     * 11. ON LOAD
-     */
-    window.addEventListener('load', () => {
+    /********************************************************
+     * 6. ON LOAD
+     ********************************************************/
+    window.addEventListener("load", () => {
       initMap();
-      startRound();
+
+      // 1) Fetch countries data from JSON (same folder)
+      fetch("./countries.json")
+        .then((res) => res.json())
+        .then((data) => {
+          COUNTRIES = data;
+          // 2) Now we have data, start the game
+          startGame();
+        })
+        .catch((err) => {
+          console.error("Error loading countries.json:", err);
+        });
 
       // Wire up buttons
-      document.getElementById("play-sound-btn").addEventListener("click", playSound);
-      document.getElementById("confirm-btn").addEventListener("click", confirmGuess);
-      document.getElementById("modal-close-btn").addEventListener("click", nextRound);
+      document
+        .getElementById("play-sound-btn")
+        .addEventListener("click", playSound);
+      document
+        .getElementById("confirm-btn")
+        .addEventListener("click", confirmGuess);
+      document
+        .getElementById("modal-close-btn")
+        .addEventListener("click", nextRound);
     });
   </script>
 </body>
